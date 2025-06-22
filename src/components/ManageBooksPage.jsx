@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ManageBooksPage.css';
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
 
@@ -39,19 +40,19 @@ const ManageBooksPage = () => {
   const [search, setSearch] = useState('');
   const [genre, setGenre] = useState('All');
   const [status, setStatus] = useState('All');
+  const navigate = useNavigate();
 
-  const filteredBooks = books.filter(book => {
-    const matchesSearch = book.title.toLowerCase().includes(search.toLowerCase());
-    const matchesGenre = genre === 'All' || book.genre === genre;
-    const matchesStatus = status === 'All' || book.status === status;
-    return matchesSearch && matchesGenre && matchesStatus;
+  const filteredBooks = books.filter((book) => {
+    const matchSearch = book.title.toLowerCase().includes(search.toLowerCase());
+    const matchGenre = genre === 'All' || book.genre === genre;
+    const matchStatus = status === 'All' || book.status === status;
+    return matchSearch && matchGenre && matchStatus;
   });
 
   return (
     <div className="manage-books">
       <h2>📘 Manage Books</h2>
 
-    
       <div className="summary-cards">
         <div className="card">Total Books: {books.length}</div>
         <div className="card available">Available: {books.filter(b => b.available > 0).length}</div>
@@ -59,7 +60,6 @@ const ManageBooksPage = () => {
         <div className="card overdue">Overdue: {books.filter(b => b.status === 'Overdue').length}</div>
       </div>
 
-      {/* Filters */}
       <div className="filters">
         <input
           type="text"
@@ -68,18 +68,17 @@ const ManageBooksPage = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <select value={genre} onChange={(e) => setGenre(e.target.value)}>
-          {genres.map((g, i) => (
-            <option key={i} value={g}>{g}</option>
+          {genres.map((g, idx) => (
+            <option key={idx} value={g}>{g}</option>
           ))}
         </select>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          {statuses.map((s, i) => (
-            <option key={i} value={s}>{s}</option>
+          {statuses.map((s, idx) => (
+            <option key={idx} value={s}>{s}</option>
           ))}
         </select>
       </div>
 
-      {/* Table */}
       <div className="table-container">
         <table>
           <thead>
@@ -96,7 +95,7 @@ const ManageBooksPage = () => {
             {filteredBooks.length === 0 ? (
               <tr><td colSpan="6" className="no-books">No books found.</td></tr>
             ) : (
-              filteredBooks.map(book => (
+              filteredBooks.map((book) => (
                 <tr key={book.id}>
                   <td>{book.title}</td>
                   <td>{book.author}</td>
@@ -104,7 +103,7 @@ const ManageBooksPage = () => {
                   <td>{book.total} / {book.available}</td>
                   <td className={book.status.toLowerCase()}>{book.status}</td>
                   <td className="action-icons">
-                    <FaEye title="View" />
+                    <FaEye title="View" onClick={() => navigate(`/view/${book.id}`)} />
                     <FaEdit title="Edit" />
                     <FaTrash title="Delete" />
                   </td>
