@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './ManageBooksPage.css';
 import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import './ManageBooksPage.css';
 
-const books = [
+const defaultBooks = [
   {
     id: 1,
     title: 'Atomic Habits',
@@ -37,10 +37,26 @@ const genres = ['All', 'Fiction', 'Finance', 'Self-help'];
 const statuses = ['All', 'Available', 'Issued', 'Overdue'];
 
 const ManageBooksPage = () => {
+  const navigate = useNavigate();
+  const [books, setBooks] = useState([]);
   const [search, setSearch] = useState('');
   const [genre, setGenre] = useState('All');
   const [status, setStatus] = useState('All');
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    const stored = localStorage.getItem('books');
+    if (stored) {
+      setBooks(JSON.parse(stored));
+    } else {
+      localStorage.setItem('books', JSON.stringify(defaultBooks));
+      setBooks(defaultBooks);
+    }
+  }, []);
+
+  const handleDelete = (id) => {
+    const updated = books.filter((b) => b.id !== id);
+    setBooks(updated);
+  };
 
   const filteredBooks = books.filter((book) => {
     const matchSearch = book.title.toLowerCase().includes(search.toLowerCase());
@@ -105,7 +121,7 @@ const ManageBooksPage = () => {
                   <td className="action-icons">
                     <FaEye title="View" onClick={() => navigate(`/view/${book.id}`)} />
                     <FaEdit title="Edit" onClick={() => navigate(`/edit/${book.id}`)} />
-                    <FaTrash title="Delete" />
+                    <FaTrash title="Delete" onClick={() => handleDelete(book.id)} />
                   </td>
                 </tr>
               ))
