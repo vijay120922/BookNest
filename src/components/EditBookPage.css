@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('wallpaper.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.edit-book {
+  max-width: 800px;
+  margin: 60px auto;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.form-container h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input, select {
+  padding: 12px 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  color:black;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+button {
+  background-image: linear-gradient(to right, #000046 0%, #1CB5E0 51%, #000046 100%);
+  background-size: 200% auto;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+button:hover {
+  background-position: right center;
+}
+
+button.back {
+  background-color: #888;
+  background-image: none;
+}

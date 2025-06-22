@@ -104,7 +104,7 @@ const ManageBooksPage = () => {
                   <td className={book.status.toLowerCase()}>{book.status}</td>
                   <td className="action-icons">
                     <FaEye title="View" onClick={() => navigate(`/view/${book.id}`)} />
-                    <FaEdit title="Edit" />
+                    <FaEdit title="Edit" onClick={() => navigate(`/edit/${book.id}`)} />
                     <FaTrash title="Delete" />
                   </td>
                 </tr>

@@ -1,0 +1,61 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('wallpaper.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.view-book {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  color:black;
+}
+
+.book-card {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.book-cover {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.book-info {
+  flex: 1;
+}
+
+.book-info h2 {
+  margin-top: 0;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.book-info p {
+  font-size: 16px;
+  margin: 10px 0;
+  line-height: 1.6;
+}
+
+.available {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.unavailable {
+  color: #ef4444;
+  font-weight: bold;
+}
