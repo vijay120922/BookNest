@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Poppins:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=IBM+Plex+Serif:wght@100..700&family=Playfair+Display:wght@500&family=Poppins:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-color:black;
+  font-family: 'Poppins', sans-serif;
+}
+
+.landing-container {
+  height: 100vh;
+  width: 100vw;
+ background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  text-align: center;
+}
+
+.welcome-text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  font-weight: 500; /* Adjust to 400, 600, etc., if needed */
+}
+
+
+.image-text {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 900; /* or 600 for slightly lighter */
+  font-size: 16vw;
+  background-image: url('/booknest2.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+
+
+.caption-text {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 10px;
+  background-image: url('/ManageBooks.jpg');
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.explore-button {
+  margin-top: 30px;
+  padding: 12px 32px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.explore-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: #000;
+  font-weight: bold;
+}
