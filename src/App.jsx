@@ -7,13 +7,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditBookPage from './components/EditBookPage';
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<ManageBooksPage />} />
-        <Route path="/view/:id" element={<ViewBookPage />} />
-        <Route path="/edit/:id" element={<EditBookPage />} />
-      </Routes>
-    </Router>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/" element={<ManageBooksPage />} />
+    //     <Route path="/view/:id" element={<ViewBookPage />} />
+    //     <Route path="/edit/:id" element={<EditBookPage />} />
+    //   </Routes>
+    // </Router>
+    <AvailableBooksDashboard />
   );
 }
 
