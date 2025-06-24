@@ -5,6 +5,7 @@ import ManageBooksPage from './components/ManageBooksPage';
 import ViewBookPage from './components/ViewBookPage';
 import EditBookPage from './components/EditBookPage';
 import AddBook from './components/AddBook';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -27,14 +28,15 @@ function App() {
   };
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<ManageBooksPage books={books} onDelete={handleDeleteBook} />} />
-        <Route path="/view/:id" element={<ViewBookPage books={books} />} />
-        <Route path="/edit/:id" element={<EditBookPage books={books} setBooks={setBooks} />} />
-        <Route path="/add" element={<AddBook onAdd={handleAddBook} onClose={() => window.history.back()} />} />
-      </Routes>
-    </Router>
+    <AdminDashboard/>
+    // <Router>
+    //   <Routes>
+    //     <Route path="/" element={<ManageBooksPage books={books} onDelete={handleDeleteBook} />} />
+    //     <Route path="/view/:id" element={<ViewBookPage books={books} />} />
+    //     <Route path="/edit/:id" element={<EditBookPage books={books} setBooks={setBooks} />} />
+    //     <Route path="/add" element={<AddBook onAdd={handleAddBook} onClose={() => window.history.back()} />} />
+    //   </Routes>
+    // </Router>
   );
 }
 
