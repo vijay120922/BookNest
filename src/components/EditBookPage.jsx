@@ -1,66 +1,65 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import './EditBookPage.css';
 
-const books = [
-  {
-    id: 1,
-    title: 'Atomic Habits',
-    author: 'James Clear',
-    genre: 'Self-help',
-    total: 10,
-    available: 4,
-    status: 'Available',
-  },
-  {
-    id: 2,
-    title: '1984',
-    author: 'George Orwell',
-    genre: 'Fiction',
-    total: 8,
-    available: 0,
-    status: 'Issued',
-  },
-  {
-    id: 3,
-    title: 'The Psychology of Money',
-    author: 'Morgan Housel',
-    genre: 'Finance',
-    total: 5,
-    available: 2,
-    status: 'Overdue',
-  },
-];
-
-const EditBookPage = () => {
+const EditBookPage = ({ books, setBooks }) => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const book = books.find((b) => b.id === parseInt(id));
+
+  const originalBook = books.find((b) => b.id === parseInt(id));
+  const [book, setBook] = useState(originalBook || null);
 
   if (!book) return <div className="edit-book">Book not found.</div>;
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setBook({ ...book, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const updatedBooks = books.map((b) =>
+      b.id === book.id ? { ...book, total: parseInt(book.total), available: parseInt(book.available) } : b
+    );
+    setBooks(updatedBooks);
+    localStorage.setItem('books', JSON.stringify(updatedBooks));
+    navigate('/');
+  };
+
   return (
     <div className="edit-book">
-      <div className="form-container">
+      <div className="form-container glass">
         <h2>Edit Book - {book.title}</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>Title</label>
-          <input type="text" defaultValue={book.title} />
+          <input type="text" name="title" value={book.title} onChange={handleChange} required />
 
           <label>Author</label>
-          <input type="text" defaultValue={book.author} />
+          <input type="text" name="author" value={book.author} onChange={handleChange} required />
 
           <label>Genre</label>
-          <input type="text" defaultValue={book.genre} />
+          <select name="genre" value={book.genre} onChange={handleChange}>
+            <option value="Fiction">Fiction</option>
+            <option value="Finance">Finance</option>
+            <option value="Self-help">Self-help</option>
+          </select>
 
           <label>Total Copies</label>
-          <input type="number" defaultValue={book.total} />
+          <input type="number" name="total" value={book.total} onChange={handleChange} min="1" required />
 
           <label>Available Copies</label>
-          <input type="number" defaultValue={book.available} />
+          <input
+            type="number"
+            name="available"
+            value={book.available}
+            onChange={handleChange}
+            min="0"
+            max={book.total}
+            required
+          />
 
           <label>Status</label>
-          <select defaultValue={book.status}>
+          <select name="status" value={book.status} onChange={handleChange}>
             <option value="Available">Available</option>
             <option value="Issued">Issued</option>
             <option value="Overdue">Overdue</option>

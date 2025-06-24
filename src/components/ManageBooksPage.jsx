@@ -52,7 +52,7 @@ const ManageBooksPage = ({ books, onDelete }) => {
           ))}
         </select>
         <button className="add-button" onClick={() => navigate('/add')}>
-          <FaPlus /> Add Book
+           Add Book
         </button>
       </div>
 
