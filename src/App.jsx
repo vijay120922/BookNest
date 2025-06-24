@@ -5,8 +5,10 @@ import ManageBooksPage from './components/ManageBooksPage';
 import ViewBookPage from './components/ViewBookPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import EditBookPage from './components/EditBookPage';
+import LandingPage from './components/LandingPage';
 function App() {
   return (
+    <LandingPage />
     // <Router>
     //   <Routes>
     //     <Route path="/" element={<ManageBooksPage />} />
@@ -14,7 +16,6 @@ function App() {
     //     <Route path="/edit/:id" element={<EditBookPage />} />
     //   </Routes>
     // </Router>
-    <AvailableBooksDashboard />
   );
 }
 

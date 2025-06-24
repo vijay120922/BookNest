@@ -56,6 +56,7 @@ const ManageBooksPage = () => {
   const handleDelete = (id) => {
     const updated = books.filter((b) => b.id !== id);
     setBooks(updated);
+   // localStorage.setItem('books', JSON.stringify(updated));
   };
 
   const filteredBooks = books.filter((book) => {
