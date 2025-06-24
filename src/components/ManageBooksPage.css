@@ -153,3 +153,10 @@ td.overdue {
   padding: 20px;
   font-style: italic;
 }
+.table-container {
+  max-height: 400px; /* adjust as needed */
+  overflow-y: auto;
+  overflow-x: auto;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}

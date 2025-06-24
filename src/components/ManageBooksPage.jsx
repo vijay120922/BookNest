@@ -1,70 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaEdit, FaTrash, FaEye } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaEye, FaPlus } from 'react-icons/fa';
 import './ManageBooksPage.css';
-
-const defaultBooks = [
-  {
-    id: 1,
-    title: 'Atomic Habits',
-    author: 'James Clear',
-    genre: 'Self-help',
-    total: 10,
-    available: 4,
-    status: 'Available',
-  },
-  {
-    id: 2,
-    title: '1984',
-    author: 'George Orwell',
-    genre: 'Fiction',
-    total: 8,
-    available: 0,
-    status: 'Issued',
-  },
-  {
-    id: 3,
-    title: 'The Psychology of Money',
-    author: 'Morgan Housel',
-    genre: 'Finance',
-    total: 5,
-    available: 2,
-    status: 'Overdue',
-  },
-];
 
 const genres = ['All', 'Fiction', 'Finance', 'Self-help'];
 const statuses = ['All', 'Available', 'Issued', 'Overdue'];
 
-const ManageBooksPage = () => {
-  const navigate = useNavigate();
-  const [books, setBooks] = useState([]);
+const ManageBooksPage = ({ books, onDelete }) => {
   const [search, setSearch] = useState('');
   const [genre, setGenre] = useState('All');
   const [status, setStatus] = useState('All');
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const stored = localStorage.getItem('books');
-    if (stored) {
-      setBooks(JSON.parse(stored));
-    } else {
-      localStorage.setItem('books', JSON.stringify(defaultBooks));
-      setBooks(defaultBooks);
-    }
-  }, []);
-
-  const handleDelete = (id) => {
-    const updated = books.filter((b) => b.id !== id);
-    setBooks(updated);
-   // localStorage.setItem('books', JSON.stringify(updated));
-  };
-
-  const filteredBooks = books.filter((book) => {
-    const matchSearch = book.title.toLowerCase().includes(search.toLowerCase());
-    const matchGenre = genre === 'All' || book.genre === genre;
-    const matchStatus = status === 'All' || book.status === status;
-    return matchSearch && matchGenre && matchStatus;
-  });
+    const filtered = books.filter(book => {
+      const matchSearch = book.title.toLowerCase().includes(search.toLowerCase());
+      const matchGenre = genre === 'All' || book.genre === genre;
+      const matchStatus = status === 'All' || book.status === status;
+      return matchSearch && matchGenre && matchStatus;
+    });
+    setFilteredBooks(filtered);
+  }, [search, genre, status, books]);
 
   return (
     <div className="manage-books">
@@ -85,15 +42,18 @@ const ManageBooksPage = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <select value={genre} onChange={(e) => setGenre(e.target.value)}>
-          {genres.map((g, idx) => (
-            <option key={idx} value={g}>{g}</option>
+          {genres.map((g, i) => (
+            <option key={i} value={g}>{g}</option>
           ))}
         </select>
         <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          {statuses.map((s, idx) => (
-            <option key={idx} value={s}>{s}</option>
+          {statuses.map((s, i) => (
+            <option key={i} value={s}>{s}</option>
           ))}
         </select>
+        <button className="add-button" onClick={() => navigate('/add')}>
+          <FaPlus /> Add Book
+        </button>
       </div>
 
       <div className="table-container">
@@ -112,7 +72,7 @@ const ManageBooksPage = () => {
             {filteredBooks.length === 0 ? (
               <tr><td colSpan="6" className="no-books">No books found.</td></tr>
             ) : (
-              filteredBooks.map((book) => (
+              filteredBooks.map(book => (
                 <tr key={book.id}>
                   <td>{book.title}</td>
                   <td>{book.author}</td>
@@ -122,7 +82,7 @@ const ManageBooksPage = () => {
                   <td className="action-icons">
                     <FaEye title="View" onClick={() => navigate(`/view/${book.id}`)} />
                     <FaEdit title="Edit" onClick={() => navigate(`/edit/${book.id}`)} />
-                    <FaTrash title="Delete" onClick={() => handleDelete(book.id)} />
+                    <FaTrash title="Delete" onClick={() => onDelete(book.id)} />
                   </td>
                 </tr>
               ))
