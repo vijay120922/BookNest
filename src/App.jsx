@@ -5,6 +5,7 @@ import ManageBooksPage from './components/ManageBooksPage';
 import ViewBookPage from './components/ViewBookPage';
 import EditBookPage from './components/EditBookPage';
 import AddBook from './components/AddBook';
+import LandingPage from './components/LandingPage';
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -35,6 +36,7 @@ function App() {
         <Route path="/add" element={<AddBook onAdd={handleAddBook} onClose={() => window.history.back()} />} />
       </Routes>
     </Router>
+    // <LandingPage/>
   );
 }
 

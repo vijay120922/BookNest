@@ -12,7 +12,7 @@ const LandingPage = () => {
           <span key={i} className="image-letter">{char}</span>
         ))}
       </div>
-
+        
       <div className="letter-line">
         {'NEST...'.split('').map((char, i) => (
           <span key={i} className="image-letter">{char}</span>
