@@ -12,10 +12,10 @@ const AdminDashboard = () => {
           <ul>
             <li className="active">Dashboard</li>
             <li>Manage Books</li>
-            <li>Issue Book</li>
+            {/* <li>Issue Book</li> */}
             <li>Return Book</li>
             <li>Add Book</li>
-            <li>Manage Members</li>
+            {/* <li>Manage Members</li> */}
           </ul>
         </nav>
       </aside>
@@ -60,7 +60,7 @@ const AdminDashboard = () => {
         <section className="charts">
           <div className="chart-box">
             <h3>Popular Genres</h3>
-            <img src="" alt="Pie Chart" />
+            <img src="nest.jpg" alt="Pie Chart" />
           </div>
           <div className="chart-box">
             <h3>Fine Collection</h3>
