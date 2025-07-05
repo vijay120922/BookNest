@@ -1,9 +1,12 @@
-// Dashboard.jsx
-import React from 'react';
+
 import './AdminDashboard.css';
 import { FaBook, FaUsers, FaUndo, FaCheckCircle } from 'react-icons/fa';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const AdminDashboard = () => {
+   const navigate = useNavigate();
   return (
     <div className="dashboard-container coastal-theme">
       <aside className="sidebar">
@@ -11,7 +14,7 @@ const AdminDashboard = () => {
         <nav>
           <ul>
             <li className="active">Dashboard</li>
-            <li>Manage Books</li>
+             <li onClick={() => navigate('/manage')}>Manage Books</li>
             {/* <li>Issue Book</li> */}
             <li>Return Book</li>
             <li>Add Book</li>

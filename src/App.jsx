@@ -28,15 +28,16 @@ function App() {
   };
 
   return (
-     <AdminDashboard/>
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<ManageBooksPage books={books} onDelete={handleDeleteBook} />} />
-    //     <Route path="/view/:id" element={<ViewBookPage books={books} />} />
-    //     <Route path="/edit/:id" element={<EditBookPage books={books} setBooks={setBooks} />} />
-    //     <Route path="/add" element={<AddBook onAdd={handleAddBook} onClose={() => window.history.back()} />} />
-    //   </Routes>
-    // </Router>
+     
+    <Router>
+      <Routes>
+             <Route path="/" element={<AdminDashboard books={books}  />} />
+        <Route path="/manage" element={<ManageBooksPage books={books} onDelete={handleDeleteBook} />} />
+        <Route path="/view/:id" element={<ViewBookPage books={books} />} />
+        <Route path="/edit/:id" element={<EditBookPage books={books} setBooks={setBooks} />} />
+        <Route path="/add" element={<AddBook onAdd={handleAddBook} onClose={() => window.history.back()} />} />
+      </Routes>
+    </Router>
   );
 }
 
