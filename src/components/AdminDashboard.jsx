@@ -1,12 +1,22 @@
-
 import './AdminDashboard.css';
 import { FaBook, FaUsers, FaUndo, FaCheckCircle } from 'react-icons/fa';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 const AdminDashboard = () => {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    const storedBooks = JSON.parse(localStorage.getItem("books")) || [];
+    setBooks(storedBooks);
+  }, []);
+
+  const totalBooks = books.length;
+  const overdueReturns = books.filter(b => b.status === "Overdue").length;
+  const issuedBooks = books.filter(b => b.status === "Issued").length;
+  const availableBooks = books.filter(b => b.available > 0).length;
+
   return (
     <div className="dashboard-container coastal-theme">
       <aside className="sidebar">
@@ -14,11 +24,9 @@ const AdminDashboard = () => {
         <nav>
           <ul>
             <li className="active">Dashboard</li>
-             <li onClick={() => navigate('/manage')}>Manage Books</li>
-            {/* <li>Issue Book</li> */}
+            <li onClick={() => navigate('/manage')}>Manage Books</li>
             <li>Return Book</li>
-            <li>Add Book</li>
-            {/* <li>Manage Members</li> */}
+            <li onClick={() => navigate('/add')}>Add Book</li>
           </ul>
         </nav>
       </aside>
@@ -34,28 +42,28 @@ const AdminDashboard = () => {
             <FaBook />
             <div>
               <p>Total Books</p>
-              <h2>2,847</h2>
+              <h2>{totalBooks}</h2>
             </div>
           </div>
           <div className="card coastal-salmon">
             <FaUndo />
             <div>
               <p>Overdue Returns</p>
-              <h2>23</h2>
+              <h2>{overdueReturns}</h2>
             </div>
           </div>
           <div className="card coastal-green">
             <FaCheckCircle />
             <div>
               <p>Issued Books</p>
-              <h2>156</h2>
+              <h2>{issuedBooks}</h2>
             </div>
           </div>
           <div className="card coastal-teal">
             <FaUsers />
             <div>
-              <p>Total Members</p>
-              <h2>892</h2>
+              <p>Available Books</p>
+              <h2>{availableBooks}</h2>
             </div>
           </div>
         </section>
